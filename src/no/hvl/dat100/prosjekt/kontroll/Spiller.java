@@ -9,11 +9,11 @@ import no.hvl.dat100.prosjekt.modell.Kort;
 /**
  * Abstrakt klasse som implementerer alle metodene i kontrakten (interfacet) ISpiller,
  * bortsett fra nesteHandling(). Dette er grunnen til at klassen er abstrakt.
- * For å lage "virkelige" spillere, må vi arve fra denne klassen og implementere
+ * For Ã¥ lage "virkelige" spillere, mÃ¥ vi arve fra denne klassen og implementere
  * nesteHandling (fra ISpiller).
  * 
  * Klassen har objektvariablene hand (Hand), antalltrekk (heltall) og spiller
- * (Spillere). Den har to konstruktører. Se beskrivelse av disse.
+ * (Spillere). Den har to konstruktÃ¸rer. Se beskrivelse av disse.
  * 
  */
 public abstract class Spiller implements ISpiller {
@@ -28,37 +28,41 @@ public abstract class Spiller implements ISpiller {
 	private Spillere spiller;
 
 	/**
-	 * Standard konstruktør som oppretter en Spiller med en hånd uten kort,
+	 * Standard konstruktÃ¸r som oppretter en Spiller med en hÃ¥nd uten kort,
 	 * antalltrekk som 0 og setter spiller til Spillere.INGEN.
 	 */
 	public Spiller() {
 		
 		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.constructor("Spiller"));
+	this.spiller = Spillere.INGEN; 
+	hand = new KortSamling();
+	antalltrekk = 0;
+	
 		// TODO - END
 	}
 
 	/**
-	 * Konstruktør der vi kan sette hvilken spiller det er (NORD, SYD eller
+	 * KonstruktÃ¸r der vi kan sette hvilken spiller det er (NORD, SYD eller
 	 * INGEN).
 	 * 
 	 * @param spiller
 	 *            hvilken spiller det er.
 	 */
 	public Spiller(Spillere spiller) {
+	
 		
-		// TODO - START
-
-		throw new UnsupportedOperationException(TODO.constructor("Spiller"));
+		
+		}
+	
+	
 		// TODO - END
-	}
+	
 
 	public int getAntallKort() {
 		
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+	return hand.getAntalKort();
 
 		// TODO - END
 	}
@@ -67,7 +71,7 @@ public abstract class Spiller implements ISpiller {
 		
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+		return hand;
 
 		// TODO - END
 	}
@@ -75,8 +79,7 @@ public abstract class Spiller implements ISpiller {
 	public int getAntallTrekk() {
 		
 		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
+	return antalltrekk;
 
 		// TODO - END
 	}
@@ -85,7 +88,7 @@ public abstract class Spiller implements ISpiller {
 		
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+		return spiller;
 
 		// TODO - END
 		
@@ -95,15 +98,17 @@ public abstract class Spiller implements ISpiller {
 		
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+		antalltrekk = t;
 		// TODO - END
 	}
 
 	public boolean erFerdig() {
 		
 		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
+	boolean a = false;
+	if (hand.erTom()==true)
+		a=true;
+	return a;
 		// TODO - END
 		
 	}
@@ -111,8 +116,7 @@ public abstract class Spiller implements ISpiller {
 	public void leggTilKort(Kort kort) {
 		
 		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
+	hand.leggTil(kort);
 		// TODO - END
 		
 	}
@@ -120,8 +124,8 @@ public abstract class Spiller implements ISpiller {
 	public void fjernKort(Kort kort) {
 		
 		// TODO - START
+		hand.fjern(kort);
 		
-		throw new UnsupportedOperationException(TODO.method());
 		// TODO - END
 		
 	}
@@ -130,15 +134,15 @@ public abstract class Spiller implements ISpiller {
 		
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+	hand.fjernAlle();
 		// TODO - END
 	}
 
 	public void trekker(Kort kort) {
 		
 		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
+		hand.leggTil(kort);
+		antalltrekk++;
 		// TODO - END
 		
 	}
