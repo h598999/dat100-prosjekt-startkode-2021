@@ -3,13 +3,14 @@ package no.hvl.dat100.prosjekt.kontroll;
 import no.hvl.dat100.prosjekt.modell.KortSamling;
 import no.hvl.dat100.prosjekt.modell.KortUtils;
 import no.hvl.dat100.prosjekt.TODO;
+import no.hvl.dat100.prosjekt.kontroll.dommer.Regler;
 import no.hvl.dat100.prosjekt.modell.Kort;
 
 /**
- * Klasse som implementerer bordet som spilles på. 
+ * Klasse som implementerer bordet som spilles pÃ¥. 
  * 
- * Klassen har objektvariablene bunkeTil og bunkeFra som skal brukes til å representere 
- * kortene som er i de to bunker på border. 
+ * Klassen har objektvariablene bunkeTil og bunkeFra som skal brukes til Ã¥ representere 
+ * kortene som er i de to bunker pÃ¥ border. 
  */
 public class Bord {
 
@@ -23,8 +24,12 @@ public class Bord {
 	public Bord() {
 		
 		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.constructor("Bord"));
+	bunkeFra = new KortSamling();
+	bunkeTil = new KortSamling();
+			
+
+	bunkeFra.leggTilAlle();
+	bunkeTil.setSamling(new Kort[4*Regler.MAKS_KORT_FARGE]);
 		// TODO - END
 	}
 	
@@ -59,7 +64,10 @@ public class Bord {
 		
 		// TODO - START
 				
-		throw new UnsupportedOperationException(TODO.method());
+	boolean a = false;
+		if (bunkeTil.erTom()==true)
+			a=true;
+		return a;
 
 		// TODO - END
 	}
@@ -73,7 +81,10 @@ public class Bord {
 		
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+		boolean a = false;
+		if(bunkeFra.erTom()==true)
+			a=true;
+		return a;
 	
 		// TODO - END
 		
@@ -88,7 +99,8 @@ public class Bord {
 		
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+		int x = bunkeFra.getAntalKort();
+		return x;
 
 		// TODO - END
 	}
@@ -102,26 +114,31 @@ public class Bord {
 		
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+	int x =bunkeTil.getAntalKort();
+	return x;
 
 		// TODO - END
 	}
 	
 	/**
-	 * Tar øverste kortet fra fra-bunken og legger dettte til til-bunken (med
-	 * billedsiden opp, men det trenger ikke gruppen tenke på).
+	 * Tar Ã¸verste kortet fra fra-bunken og legger dettte til til-bunken (med
+	 * billedsiden opp, men det trenger ikke gruppen tenke pÃ¥).
 	 */
 	public void vendOversteFraBunke() {
 		
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+		Kort[] samling = bunkeFra.getAllekort();
+		Kort v = samling[samling.length-1];
+		bunkeFra.fjern(v);
+		bunkeTil.leggTil(v);
+		
 		// TODO - END
 		
 	}
 		
 	/**
-	 * Tar øverste kortet fra fra-bunken.
+	 * Tar Ã¸verste kortet fra fra-bunken.
 	 * 
 	 * @return peker/referanse til det kort som blev tatt fra fra-bunken
 	 */
@@ -129,38 +146,52 @@ public class Bord {
 	public Kort taOversteFraBunke() {
 		
 		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
-
+Kort[] samling = bunkeFra.getAllekort();
+Kort v = samling[samling.length-1];
+bunkeFra.fjern(v);
+return v;
 		// TODO - END
 	}
 	
 	/**
-	 * Metode som leser øverste kortet i til-bunken. Kortet vil fremdeles være
-	 * øverst i til-bunken etter at metoden er utført.
+	 * Metode som leser Ã¸verste kortet i til-bunken. Kortet vil fremdeles vÃ¦re
+	 * Ã¸verst i til-bunken etter at metoden er utfÃ¸rt.
 	 * 
-	 * @return peker/referanse til øverste kortet i til-bunken.
+	 * @return peker/referanse til Ã¸verste kortet i til-bunken.
 	 */
 	public Kort seOversteBunkeTil() {
 		
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+	return bunkeTil.seSiste();
 
 		// TODO - END
 	}
 	
 	/**
-	 * Når fra-bunken blir tom, tar man vare på kortet pÂ toppen av til-bunken.
+	 * NÃ¥r fra-bunken blir tom, tar man vare pÃ¥ kortet pÃ‚ toppen av til-bunken.
 	 * Deretter legges alle den andre kortene i til-bunken over i fra-bunken.
-	 * Denne stokkes og kortet som man har tatt vare pÂ legges tilbake i
-	 * til-bunken. Det vil nå være det eneste kortet i til-bunken.
+	 * Denne stokkes og kortet som man har tatt vare pÃ‚ legges tilbake i
+	 * til-bunken. Det vil nÃ¥ vÃ¦re det eneste kortet i til-bunken.
 	 */
 	public void snuTilBunken() {
 
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+		if (bunkeFra.erTom()==true) {
+			Kort v = bunkeTil.taSiste();
+		for (int i = 0; i<bunkeTil.getAntalKort(); i++) {
+			
+			Kort samling[]=bunkeTil.getAllekort();
+			Kort b = samling[i];
+			bunkeFra.leggTil(b);
+		}
+		bunkeTil.fjernAlle();
+		KortUtils.stokk(bunkeFra);
+		bunkeTil.leggTil(v);
+		
+		}
+			
 		// TODO - END
 	}
 		
@@ -174,8 +205,7 @@ public class Bord {
 	public void leggNedBunkeTil(Kort k) {
 		
 		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
+		bunkeTil.leggTil(k);
 		// TODO - END
 				
 	}
