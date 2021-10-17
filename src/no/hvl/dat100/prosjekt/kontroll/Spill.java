@@ -12,7 +12,7 @@ import no.hvl.dat100.prosjekt.modell.KortUtils;
 
 /**
  * Klassen har objektvariaber som er referanser til de spillerne, nord og syd
- * (type ISpiller). Den har ogsÂ en bunke man deler/trekker fra og en bunke man
+ * (type ISpiller). Den har ogsÃ‚ en bunke man deler/trekker fra og en bunke man
  * spiller til.
  * 
  */
@@ -29,8 +29,11 @@ public class Spill {
 	public Spill() {
 		
 		// TODO - START
+		bord = new Bord();
+		nord = new NordSpiller(Spillere.NORD);
+		syd = new SydSpiller(Spillere.SYD);
 		
-		throw new UnsupportedOperationException(TODO.constructor("Spill"));
+		
 		// TODO - END
 		
 	}
@@ -43,8 +46,7 @@ public class Spill {
 	public Bord getBord() {
 		
 		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
+		return bord;
 
 		// TODO - END
 		
@@ -59,7 +61,7 @@ public class Spill {
 		
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+		return syd;
 
 		// TODO - END
 		
@@ -74,7 +76,7 @@ public class Spill {
 		
 		// TODO - START
 
-		throw new UnsupportedOperationException(TODO.method());
+	return nord;
 
 		// TODO - END
 	}
@@ -83,16 +85,15 @@ public class Spill {
 	 * Metoden oppretter to spillere, nord og syd. Det opprettes to bunker, fra
 	 * og til. Alle kortene legges til fra. Bunken fra stokkes. Deretter deles
 	 * det ut kort fra fra-bunken til nord og syd i henhold til regler. Til
-	 * slutt tas øverste kortet fra fra-bunken og legges til til-bunken.
+	 * slutt tas Ã¸verste kortet fra fra-bunken og legges til til-bunken.
 	 * 
-	 * Nord har type RandomSpiller (som er forhåndefinert). Syd vil være spiller
+	 * Nord har type RandomSpiller (som er forhÃ¥ndefinert). Syd vil vÃ¦re spiller
 	 * av en klasse laget av gruppen (implementeres i oppgave 3).
 	 */
 	public void start() {
 		
 		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
+	
 		// TODO - END
 	}
 
@@ -110,7 +111,7 @@ public class Spill {
 
 	/**
 	 * Trekker et kort fra fra-bunken til spilleren gitt som parameter. Om
-	 * fra-bunken er tom, må man "snu" til-bunken. Se info om metoden
+	 * fra-bunken er tom, mÃ¥ man "snu" til-bunken. Se info om metoden
 	 * snuTilBunken().
 	 * 
 	 * @param spiller
@@ -133,7 +134,7 @@ public class Spill {
 	 * @param spiller
 	 *            spiller som handle.
 	 * 
-	 * @return handlingen som blir utført.
+	 * @return handlingen som blir utfÃ¸rt.
 	 */
 	public Handling nesteHandling(ISpiller spiller) {
 		
@@ -148,7 +149,7 @@ public class Spill {
 	/**
 	 * Metoden spiller et kort. Den sjekker at spiller har kortet. Dersom det er
 	 * tilfelle, fjernes kortet fra spilleren og legges til til-bunken. Metoden
-	 * nulltiller også antall ganger spilleren har trukket kort.
+	 * nulltiller ogsÃ¥ antall ganger spilleren har trukket kort.
 	 * 
 	 * @param spiller
 	 *            den som spiller.
@@ -167,7 +168,7 @@ public class Spill {
 	}
 
 	/**
-	 * Metode for å si forbi. Må nullstille antall ganger spilleren har trukket
+	 * Metode for Ã¥ si forbi. MÃ¥ nullstille antall ganger spilleren har trukket
 	 * kort.
 	 * 
 	 * @param spiller
@@ -183,13 +184,13 @@ public class Spill {
 	}
 
 	/**
-	 * Metode for å utføre en handling (trekke, spille, forbi). Dersom handling
-	 * er kort, blir kortet også spilt.
+	 * Metode for Ã¥ utfÃ¸re en handling (trekke, spille, forbi). Dersom handling
+	 * er kort, blir kortet ogsÃ¥ spilt.
 	 * 
 	 * @param spiller
-	 *            spiller som utfører handlingen.
+	 *            spiller som utfÃ¸rer handlingen.
 	 * @param handling
-	 *            handling som utføres.
+	 *            handling som utfÃ¸res.
 	 * 
 	 * @return kort som trekkes, kort som spilles eller null ved forbi.
 	 */
@@ -200,7 +201,7 @@ public class Spill {
 
 		// Hint: del opp i de tre mulige handlinger og vurder 
 		// om noen andre private metoder i klassen kan brukes
-		// til å implementere denne metoden
+		// til Ã¥ implementere denne metoden
 				
 		throw new UnsupportedOperationException(TODO.method());
 
