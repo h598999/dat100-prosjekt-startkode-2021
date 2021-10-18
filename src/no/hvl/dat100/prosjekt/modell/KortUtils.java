@@ -9,7 +9,7 @@ import no.hvl.dat100.prosjekt.TODO;
 public class KortUtils {
 
 	/**
-	 * Sorterer en samling. RekkefÃ¸lgen er bestemt av compareTo() i Kort-klassen.
+	 * Sorterer en samling. RekkefÃƒÂ¸lgen er bestemt av compareTo() i Kort-klassen.
 	 * 
 	 * @see Kort
 	 * 
@@ -66,16 +66,13 @@ public class KortUtils {
 	public static void stokk(KortSamling samling) {
 		
 		// TODO - START
-		Kort[]stokket = samling.getAllekort();
-		Kort[]sortert = stokket;
-		for (int i = 0; i<stokket.length; i++) {
-			int j = (int)Math.random()*stokket.length;
-			Kort temp = sortert[i];
-			temp = stokket[j];
-			
+		Random random = new Random();
+		for (int i = samling.getSamling().length-1; i>0; i--) {
+			int j = random.nextInt(i);
+			Kort temp = samling.getSamling()[i];
+			samling.getSamling()[i] = samling.getSamling()[j];
+			samling.getSamling()[j]=temp;
 		}
-		if (samling.erTom()!=true)
-		samling.setSamling(stokket);
 		// TODO - END
 	}
 	
