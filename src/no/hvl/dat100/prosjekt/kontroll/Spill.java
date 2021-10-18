@@ -12,7 +12,7 @@ import no.hvl.dat100.prosjekt.modell.KortUtils;
 
 /**
  * Klassen har objektvariaber som er referanser til de spillerne, nord og syd
- * (type ISpiller). Den har ogsÃ‚ en bunke man deler/trekker fra og en bunke man
+ * (type ISpiller). Den har ogsÃƒâ€š en bunke man deler/trekker fra og en bunke man
  * spiller til.
  * 
  */
@@ -85,15 +85,21 @@ public class Spill {
 	 * Metoden oppretter to spillere, nord og syd. Det opprettes to bunker, fra
 	 * og til. Alle kortene legges til fra. Bunken fra stokkes. Deretter deles
 	 * det ut kort fra fra-bunken til nord og syd i henhold til regler. Til
-	 * slutt tas Ã¸verste kortet fra fra-bunken og legges til til-bunken.
+	 * slutt tas ÃƒÂ¸verste kortet fra fra-bunken og legges til til-bunken.
 	 * 
-	 * Nord har type RandomSpiller (som er forhÃ¥ndefinert). Syd vil vÃ¦re spiller
+	 * Nord har type RandomSpiller (som er forhÃƒÂ¥ndefinert). Syd vil vÃƒÂ¦re spiller
 	 * av en klasse laget av gruppen (implementeres i oppgave 3).
 	 */
 	public void start() {
 		
 		// TODO - START
-	
+	ISpiller spillernord = nord;
+	ISpiller spillersyd = syd;
+	Bord bordspill = bord;
+	delutKort();
+	Kort v = bordspill.getBunkeFra().taSiste();
+	bordspill.getBunkeTil().leggTil(v);
+		
 		// TODO - END
 	}
 
@@ -104,14 +110,24 @@ public class Spill {
 	private void delutKort() {
 
 		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
+	
+	KortSamling kortstokk = bord.getBunkeFra();
+	KortUtils.stokk(kortstokk);
+	for (int i = 0; i<Regler.ANTALL_KORT_START; i++) {
+		Kort v = kortstokk.taSiste();
+		nord.leggTilKort(v);
+	}
+	
+	for (int i = 0; i<Regler.ANTALL_KORT_START; i++) {
+		Kort v = kortstokk.taSiste();
+		syd.leggTilKort(v);
+	}
 		// TODO - END
 	}
 
 	/**
 	 * Trekker et kort fra fra-bunken til spilleren gitt som parameter. Om
-	 * fra-bunken er tom, mÃ¥ man "snu" til-bunken. Se info om metoden
+	 * fra-bunken er tom, mÃƒÂ¥ man "snu" til-bunken. Se info om metoden
 	 * snuTilBunken().
 	 * 
 	 * @param spiller
@@ -122,8 +138,16 @@ public class Spill {
 	public Kort trekkFraBunke(ISpiller spiller) {
 
 		// TODO - START
-			
-		throw new UnsupportedOperationException(TODO.method());
+		Kort v = null;
+				
+				bord.snuTilBunken();
+				v = bord.getBunkeFra().taSiste();
+				spiller.leggTilKort(v);
+				int x = spiller.getAntallTrekk();
+				spiller.setAntallTrekk(x+1);
+				return v;
+		
+
 
 		// TODO - END
 	}
@@ -134,13 +158,12 @@ public class Spill {
 	 * @param spiller
 	 *            spiller som handle.
 	 * 
-	 * @return handlingen som blir utfÃ¸rt.
+	 * @return handlingen som blir utfÃƒÂ¸rt.
 	 */
 	public Handling nesteHandling(ISpiller spiller) {
 		
 		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
+	return spiller.nesteHandling(bord.seOversteBunkeTil());
 
 		// TODO - END
 		
@@ -149,7 +172,7 @@ public class Spill {
 	/**
 	 * Metoden spiller et kort. Den sjekker at spiller har kortet. Dersom det er
 	 * tilfelle, fjernes kortet fra spilleren og legges til til-bunken. Metoden
-	 * nulltiller ogsÃ¥ antall ganger spilleren har trukket kort.
+	 * nulltiller ogsÃƒÂ¥ antall ganger spilleren har trukket kort.
 	 * 
 	 * @param spiller
 	 *            den som spiller.
@@ -161,14 +184,21 @@ public class Spill {
 	public boolean leggnedKort(ISpiller spiller, Kort kort) {
 		
 		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
+		boolean a = false;
+	if (spiller.getHand().har(kort)==true) {
+		a=true;
+		spiller.getHand().fjern(kort);
+		bord.leggNedBunkeTil(kort);
+		spiller.setAntallTrekk(0);
+	}
+	return a;
+	
 
 		// TODO - END
 	}
 
 	/**
-	 * Metode for Ã¥ si forbi. MÃ¥ nullstille antall ganger spilleren har trukket
+	 * Metode for ÃƒÂ¥ si forbi. MÃƒÂ¥ nullstille antall ganger spilleren har trukket
 	 * kort.
 	 * 
 	 * @param spiller
@@ -178,19 +208,19 @@ public class Spill {
 		
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+
 	
 		// TODO - END
 	}
 
 	/**
-	 * Metode for Ã¥ utfÃ¸re en handling (trekke, spille, forbi). Dersom handling
-	 * er kort, blir kortet ogsÃ¥ spilt.
+	 * Metode for ÃƒÂ¥ utfÃƒÂ¸re en handling (trekke, spille, forbi). Dersom handling
+	 * er kort, blir kortet ogsÃƒÂ¥ spilt.
 	 * 
 	 * @param spiller
-	 *            spiller som utfÃ¸rer handlingen.
+	 *            spiller som utfÃƒÂ¸rer handlingen.
 	 * @param handling
-	 *            handling som utfÃ¸res.
+	 *            handling som utfÃƒÂ¸res.
 	 * 
 	 * @return kort som trekkes, kort som spilles eller null ved forbi.
 	 */
@@ -201,7 +231,7 @@ public class Spill {
 
 		// Hint: del opp i de tre mulige handlinger og vurder 
 		// om noen andre private metoder i klassen kan brukes
-		// til Ã¥ implementere denne metoden
+		// til ÃƒÂ¥ implementere denne metoden
 				
 		throw new UnsupportedOperationException(TODO.method());
 
