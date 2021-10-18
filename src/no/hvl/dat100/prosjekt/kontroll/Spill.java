@@ -6,6 +6,7 @@ import no.hvl.dat100.prosjekt.modell.KortSamling;
 import no.hvl.dat100.prosjekt.TODO;
 import no.hvl.dat100.prosjekt.kontroll.dommer.Regler;
 import no.hvl.dat100.prosjekt.kontroll.spill.Handling;
+import no.hvl.dat100.prosjekt.kontroll.spill.HandlingsType;
 import no.hvl.dat100.prosjekt.kontroll.spill.Spillere;
 import no.hvl.dat100.prosjekt.modell.Kort;
 import no.hvl.dat100.prosjekt.modell.KortUtils;
@@ -207,9 +208,9 @@ public class Spill {
 	public void forbiSpiller(ISpiller spiller) {
 		
 		// TODO - START
-		
-
-	
+	Handling forbi = new Handling(HandlingsType.FORBI, null);
+	forbi.skifteTur();
+	spiller.setAntallTrekk(0);
 		// TODO - END
 	}
 
@@ -233,9 +234,27 @@ public class Spill {
 		// om noen andre private metoder i klassen kan brukes
 		// til ÃƒÂ¥ implementere denne metoden
 				
-		throw new UnsupportedOperationException(TODO.method());
+
+if (handling.getType()==HandlingsType.FORBI) {
+ kort = null;
+	forbiSpiller(spiller);
+}
+		
+	
+if (handling.getType()==HandlingsType.TREKK) {
+	kort = bord.getBunkeFra().taSiste();
+	spiller.getHand().leggTil(kort);}
+
+if (handling.getType()==HandlingsType.LEGGNED) {
+	Kort[] hand = spiller.getHand().getSamling();
+	kort = hand[0];
+	spiller.getHand().fjern(kort);
+	bord.getBunkeTil().leggTil(kort);}
+return kort;	
+	
+}
 
 		// TODO - END
 	}
 
-}
+
